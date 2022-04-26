@@ -1,38 +1,127 @@
-.App {
-  text-align: center;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@layer utilities {
+  .absolute-center {
+    @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@layer components {
+  .dark-bg-img {
+    background-image: url("./images/bg-desktop-dark.jpg");
+  }
+
+  .light-bg-img {
+    background-image: url("./images/bg-desktop-light.jpg");
+  }
+
+  .moon {
+    content: "";
+    @apply bg-moon-icon;
+  }
+
+  .sun {
+    @apply bg-sun-icon;
+    content: "";
+  }
 }
 
-.App-link {
-  color: #61dafb;
+.app {
+  @apply dark:bg-very-dark-blue bg-very-light-gray dark:text-light-grayish-blue-100 text-very-dark-grayish-blue-300 h-screen w-screen flex justify-center items-center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-body {
+  @apply z-10 h-full py-6 flex flex-col justify-evenly items-center lg:w-[37.5%] md:w-[70vw] w-[85vw];
+}
+
+.app-bg {
+  @apply w-full absolute top-0 left-0 bg-top bg-no-repeat bg-cover min-h-[calc(100vw*(300/1440))] lg:h-[15vmax] 2xl:h-[350px] h-[35vmax];
+}
+
+.theme-toggle-icon::before {
+  @apply absolute inset-0 before:aspect-square dark:sun moon bg-right bg-no-repeat;
+}
+
+.new-todo {
+  @apply bg-white dark:bg-very-dark-desaturated-blue w-full p-6 flex items-center rounded-md;
+}
+
+.new-todo input[type="text"] {
+  @apply h-6 bg-transparent outline-none border-none ml-6 text-xl font-medium caret-primary focus:placeholder:text-transparent;
+}
+
+.todo-list {
+  @apply w-full bg-white dark:bg-very-dark-desaturated-blue rounded-md shadow-xl overflow-clip max-h-[60vh] min-h-[55vh] flex flex-col mt-6;
+}
+
+.todo-list > ol {
+  @apply flex-grow w-full flex flex-col items-center overflow-y-auto;
+}
+
+.todo-item {
+  @apply relative bg-white dark:bg-very-dark-desaturated-blue w-full p-6 flex items-center border-b-[1px] border-very-light-grayish-blue dark:border-very-dark-grayish-blue-300 cursor-pointer;
+}
+
+.todo-item:hover .close-button,
+.todo-item:focus-within .close-button {
+  @apply scale-100;
+}
+
+.todo-item .close-button {
+  @apply absolute top-6 bottom-6 right-6 aspect-square flex justify-center items-center bg-cross-icon bg-no-repeat bg-center cursor-pointer transition-transform duration-200 scale-0;
+}
+
+.mobile-nav {
+  @apply w-full p-4 bg-white dark:bg-very-dark-desaturated-blue rounded-md shadow-xl xl:hidden;
+}
+
+.bottom-text {
+  @apply text-dark-grayish-blue-200 dark:text-dark-grayish-blue-100;
+}
+
+.bottom-button {
+  @apply hover:text-very-dark-grayish-blue-300 dark:hover:text-white;
+}
+
+footer {
+  @apply relative w-full p-4 flex items-center justify-between border-t-[1px] border-very-light-grayish-blue dark:border-very-dark-grayish-blue-300;
+}
+
+footer nav {
+  @apply hidden xl:block;
+}
+
+nav li + li {
+  @apply ml-4;
+}
+
+.bottom-button.active {
+  @apply text-primary;
+}
+
+input[type="checkbox"] {
+  @apply scale-0 absolute;
+}
+input[type="checkbox"] + label {
+  @apply relative h-6 aspect-square rounded-full cursor-pointer bg-light-grayish-blue-200 dark:bg-very-dark-grayish-blue-300 hover:bg-gradient-to-br focus:bg-gradient-to-br focus:outline-none focus:border-none from-gradient-1 to-gradient-2;
+}
+
+input[type="checkbox"] + label::before {
+  content: "";
+  @apply absolute inset-[1px] bg-white dark:bg-very-dark-desaturated-blue rounded-full;
+}
+
+input[type="checkbox"]:checked + label {
+  @apply bg-gradient-to-br;
+}
+
+input[type="checkbox"]:checked + label::before {
+  @apply hidden;
+}
+
+input[type="checkbox"]:checked + label::after {
+  content: "";
+  @apply absolute inset-0 flex justify-center items-center bg-no-repeat bg-center bg-check-icon;
 }
