@@ -5,11 +5,12 @@ export const NewTodo = ({setTodos}: NewTodoProps) => {
   
     const KeyDown = (e: { key: string; }) => {
       if(e.key === "Enter") {
-        setTodos((prev: Todo[]) => [...prev, {
+        setTodos(prev => [...prev, {
           id: prev.length + 1,
           name: inputValue,
           completed: false,
         }])
+        setInputValue("");
       }
     }
   

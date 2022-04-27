@@ -1,6 +1,8 @@
 export {};
 
 declare global {
+  type Setter<T> = React.Dispatch<React.SetStateAction<T>>;
+
   type Todo = {
     id: number,
     name: string,
@@ -9,18 +11,17 @@ declare global {
 
   interface TodoListProps {
     todos: Todo[], 
-    setTodos: (value: any) => void, 
+    setTodos: Setter<Todo[]>, 
     page: string, 
-    setPage: (value: any) => void
+    setPage:  (value: React.SetStateAction<string>) => void
   }
   
   interface TodoItemProps {
-    todos: Todo[],
     todo: Todo,
-    setTodos: (value: any) => void, 
+    setTodos:  Setter<Todo[]>
   }
 
   interface NewTodoProps {
-    setTodos: (value: any) => void; 
+    setTodos:  Setter<Todo[]> 
   }
 }

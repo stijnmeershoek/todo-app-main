@@ -6,11 +6,13 @@ module.exports = {
       fontFamily: {
         josefin: ["Josefin Sans", "sans-serif"],
       },
-      backgroundImage: (theme) => ({
+      backgroundImage: () => ({
         "moon-icon": "url('./images/icon-moon.svg')",
         "sun-icon": "url('./images/icon-sun.svg')",
         "check-icon": "url('./images/icon-check.svg')",
         "cross-icon": "url('./images/icon-cross.svg')",
+        "dark-theme": "url('./images/bg-desktop-dark.jpg')",
+        "light-theme": "url('./images/bg-desktop-light.jpg')",
       }),
       colors: {
         primary: "hsl(220, 98%, 61%)",
@@ -41,7 +43,6 @@ module.exports = {
           "grayish-blue": {
             100: "hsl(234, 39%, 85%)",
             200: "hsl(233, 11%, 84%)",
-            hover: "hsl(236, 33%, 92%)",
           },
         },
       },

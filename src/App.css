@@ -6,34 +6,32 @@
   .absolute-center {
     @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2;
   }
+
+  .color-scheme-dark {
+    color-scheme: dark;
+  }
 }
 
 @layer components {
   .dark-bg-img {
-    background-image: url("./images/bg-desktop-dark.jpg");
+    @apply bg-dark-theme;
   }
 
   .light-bg-img {
-    background-image: url("./images/bg-desktop-light.jpg");
+    @apply bg-light-theme;
   }
 
   .moon {
-    content: "";
     @apply bg-moon-icon;
   }
 
   .sun {
     @apply bg-sun-icon;
-    content: "";
   }
 }
 
-.dark {
-  color-scheme: dark;
-}
-
 .app {
-  @apply dark:bg-very-dark-blue bg-very-light-gray dark:text-light-grayish-blue-100 text-very-dark-grayish-blue-300 h-screen w-screen flex justify-center items-center;
+  @apply font-josefin text-lg dark:color-scheme-dark dark:bg-very-dark-blue bg-very-light-gray dark:text-light-grayish-blue-100 text-very-dark-grayish-blue-300 h-screen w-screen flex justify-center items-center;
 }
 
 .app-body {
@@ -41,18 +39,19 @@
 }
 
 .app-bg {
-  @apply w-full absolute top-0 left-0 bg-top bg-no-repeat bg-cover min-h-[calc(100vw*(300/1440))] lg:h-[15vmax] 2xl:h-[350px] h-[35vmax];
+  @apply dark:dark-bg-img light-bg-img w-full absolute top-0 left-0 bg-top bg-no-repeat bg-cover min-h-[calc(100vw*(300/1440))] lg:h-[15vmax] 2xl:h-[350px] h-[35vmax];
 }
 
 .theme-toggle-icon::before {
+  content: "";
   @apply absolute inset-0 before:aspect-square dark:sun moon bg-right bg-no-repeat;
 }
 
 .new-todo {
-  @apply bg-white dark:bg-very-dark-desaturated-blue w-full p-6 flex items-center rounded-md;
+  @apply bg-white dark:bg-very-dark-desaturated-blue w-full px-6 py-5 flex items-center rounded-md shadow-xl;
 
   input[type="text"] {
-    @apply h-6 bg-transparent outline-none border-none ml-6 text-xl font-medium caret-primary focus:placeholder:text-transparent;
+    @apply w-full bg-transparent outline-none border-none ml-6 font-medium caret-primary focus:placeholder:text-transparent;
   }
 }
 
@@ -60,15 +59,23 @@
   @apply w-full bg-white dark:bg-very-dark-desaturated-blue rounded-md shadow-xl overflow-clip max-h-[60vh] min-h-[55vh] flex flex-col mt-6;
 
   > ol {
-    @apply flex-grow w-full flex flex-col items-center overflow-y-auto;
+    @apply flex-grow w-full flex flex-col items-center overflow-y-auto overflow-x-hidden;
+
+    &::-webkit-scrollbar {
+      @apply w-[10px];
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-gradient-to-br from-gradient-1 to-gradient-2 rounded-sm;
+    }
   }
 }
 
 .todo-item {
-  @apply relative bg-white dark:bg-very-dark-desaturated-blue w-full p-6 flex items-center border-b-[1px] border-very-light-grayish-blue dark:border-very-dark-grayish-blue-300 cursor-pointer;
+  @apply relative bg-white dark:bg-very-dark-desaturated-blue w-full px-6 py-[1.15rem] flex items-center border-b-[1px] border-very-light-grayish-blue dark:border-very-dark-grayish-blue-200 cursor-pointer active:cursor-grabbing;
 
   .close-button {
-    @apply absolute top-6 bottom-6 right-6 aspect-square flex justify-center items-center bg-cross-icon bg-no-repeat bg-center cursor-pointer transition-transform duration-200 scale-0;
+    @apply absolute top-[1.15rem] bottom-[1.15rem] right-6 aspect-square flex justify-center items-center bg-cross-icon bg-no-repeat bg-center cursor-pointer transition-transform duration-200 scale-0;
   }
 
   &:hover,
@@ -96,7 +103,7 @@
 }
 
 footer {
-  @apply relative w-full p-4 flex items-center justify-between border-t-[1px] border-very-light-grayish-blue dark:border-very-dark-grayish-blue-300;
+  @apply relative w-full p-4 flex items-center justify-between border-t-[1px] border-very-light-grayish-blue dark:border-very-dark-grayish-blue-200;
 
   nav {
     @apply hidden xl:block;
@@ -110,8 +117,12 @@ nav li + li {
 input[type="checkbox"] {
   @apply scale-0 absolute;
 
+  &:disabled + label {
+    @apply pointer-events-none;
+  }
+
   + label {
-    @apply relative h-6 aspect-square rounded-full cursor-pointer bg-light-grayish-blue-200 dark:bg-very-dark-grayish-blue-300 hover:bg-gradient-to-br focus:bg-gradient-to-br focus:outline-none focus:border-none from-gradient-1 to-gradient-2;
+    @apply relative h-6 aspect-square rounded-full cursor-pointer bg-very-light-grayish-blue dark:bg-very-dark-grayish-blue-300 hover:bg-gradient-to-br focus:bg-gradient-to-br focus:outline-none focus:border-none from-gradient-1 to-gradient-2;
 
     &::before {
       content: "";
