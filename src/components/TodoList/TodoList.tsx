@@ -9,9 +9,9 @@ export const TodoList = ({todos, setTodos, page, setPage}: TodoListProps) => {
     return (
       <div className="todo-list">
         <Reorder.Group as="ol" axis="y" layoutScroll values={todos} onReorder={setTodos}>
-          {todos.map(todo => {
+          {todos.map((todo, _, arr) => {
             return (
-              <TodoItem key={todo.id} todos={todos} todo={todo} setTodos={setTodos}/>
+              <TodoItem key={todo.id} todos={arr} todo={todo} setTodos={setTodos}/>
             )
           })}
           </Reorder.Group>

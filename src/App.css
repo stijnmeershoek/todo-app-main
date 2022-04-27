@@ -28,6 +28,10 @@
   }
 }
 
+.dark {
+  color-scheme: dark;
+}
+
 .app {
   @apply dark:bg-very-dark-blue bg-very-light-gray dark:text-light-grayish-blue-100 text-very-dark-grayish-blue-300 h-screen w-screen flex justify-center items-center;
 }
@@ -46,31 +50,33 @@
 
 .new-todo {
   @apply bg-white dark:bg-very-dark-desaturated-blue w-full p-6 flex items-center rounded-md;
-}
 
-.new-todo input[type="text"] {
-  @apply h-6 bg-transparent outline-none border-none ml-6 text-xl font-medium caret-primary focus:placeholder:text-transparent;
+  input[type="text"] {
+    @apply h-6 bg-transparent outline-none border-none ml-6 text-xl font-medium caret-primary focus:placeholder:text-transparent;
+  }
 }
 
 .todo-list {
   @apply w-full bg-white dark:bg-very-dark-desaturated-blue rounded-md shadow-xl overflow-clip max-h-[60vh] min-h-[55vh] flex flex-col mt-6;
-}
 
-.todo-list > ol {
-  @apply flex-grow w-full flex flex-col items-center overflow-y-auto;
+  > ol {
+    @apply flex-grow w-full flex flex-col items-center overflow-y-auto;
+  }
 }
 
 .todo-item {
   @apply relative bg-white dark:bg-very-dark-desaturated-blue w-full p-6 flex items-center border-b-[1px] border-very-light-grayish-blue dark:border-very-dark-grayish-blue-300 cursor-pointer;
-}
 
-.todo-item:hover .close-button,
-.todo-item:focus-within .close-button {
-  @apply scale-100;
-}
+  .close-button {
+    @apply absolute top-6 bottom-6 right-6 aspect-square flex justify-center items-center bg-cross-icon bg-no-repeat bg-center cursor-pointer transition-transform duration-200 scale-0;
+  }
 
-.todo-item .close-button {
-  @apply absolute top-6 bottom-6 right-6 aspect-square flex justify-center items-center bg-cross-icon bg-no-repeat bg-center cursor-pointer transition-transform duration-200 scale-0;
+  &:hover,
+  &:focus-within {
+    .close-button {
+      @apply scale-100;
+    }
+  }
 }
 
 .mobile-nav {
@@ -83,45 +89,46 @@
 
 .bottom-button {
   @apply hover:text-very-dark-grayish-blue-300 dark:hover:text-white;
+
+  &.active {
+    @apply text-primary;
+  }
 }
 
 footer {
   @apply relative w-full p-4 flex items-center justify-between border-t-[1px] border-very-light-grayish-blue dark:border-very-dark-grayish-blue-300;
-}
 
-footer nav {
-  @apply hidden xl:block;
+  nav {
+    @apply hidden xl:block;
+  }
 }
 
 nav li + li {
   @apply ml-4;
 }
 
-.bottom-button.active {
-  @apply text-primary;
-}
-
 input[type="checkbox"] {
   @apply scale-0 absolute;
-}
-input[type="checkbox"] + label {
-  @apply relative h-6 aspect-square rounded-full cursor-pointer bg-light-grayish-blue-200 dark:bg-very-dark-grayish-blue-300 hover:bg-gradient-to-br focus:bg-gradient-to-br focus:outline-none focus:border-none from-gradient-1 to-gradient-2;
-}
 
-input[type="checkbox"] + label::before {
-  content: "";
-  @apply absolute inset-[1px] bg-white dark:bg-very-dark-desaturated-blue rounded-full;
+  + label {
+    @apply relative h-6 aspect-square rounded-full cursor-pointer bg-light-grayish-blue-200 dark:bg-very-dark-grayish-blue-300 hover:bg-gradient-to-br focus:bg-gradient-to-br focus:outline-none focus:border-none from-gradient-1 to-gradient-2;
+
+    &::before {
+      content: "";
+      @apply absolute inset-[1px] bg-white dark:bg-very-dark-desaturated-blue rounded-full;
+    }
+  }
 }
 
 input[type="checkbox"]:checked + label {
   @apply bg-gradient-to-br;
-}
 
-input[type="checkbox"]:checked + label::before {
-  @apply hidden;
-}
+  &::before {
+    @apply hidden;
+  }
 
-input[type="checkbox"]:checked + label::after {
-  content: "";
-  @apply absolute inset-0 flex justify-center items-center bg-no-repeat bg-center bg-check-icon;
+  &::after {
+    content: "";
+    @apply absolute inset-0 flex justify-center items-center bg-no-repeat bg-center bg-check-icon;
+  }
 }

@@ -6,7 +6,7 @@ export const TodoItem = ({todos, todo, setTodos}: TodoItemProps) => {
   
     useEffect(() => {
       setTodos((prev: Todo[]) => prev.map(item => item.id === todo.id ? {...item, completed : checked} : item ))
-    }, [checked, setTodos, todo.id])
+    }, [checked])
   
     const removeTodo = () => {
       let newArr = todos.filter(item => todo.id !== item.id);
