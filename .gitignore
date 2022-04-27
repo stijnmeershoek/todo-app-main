@@ -10,8 +10,8 @@ lerna-debug.log*
 node_modules
 /.pnp
 .pnp.js
-dist
-dist-ssr
+build 
+build-ssr
 *.local
 
 # Editor directories and files
